@@ -1,4 +1,4 @@
-# Survivability-of-charitable-organisations-
+# Survivability-of-charitable-organisations
 
 This ongoing project investigates **what factors influence the survival** of charitable organisations in the UK by analyzing a combination of charity operational data and regional socioeconomic indicators.
 

@@ -2,14 +2,14 @@
 
 This ongoing project investigates **what factors influence the survival** of charitable organisations in the UK by analyzing a combination of charity operational data and regional socioeconomic indicators.
 
-##  Project Goal
+## Project Goal
 
 To explore and identify key variables — such as financial health, age, sector, and local economic conditions — that contribute to whether a charity continues operating or not.
 
 
 ##  Datasets Used
 
-1. ** UK Charity Dataset**
+1. **UK Charity Dataset**
    - Details about UK-registered charities
    - Includes:
      - Financials (income, donations, government grants)

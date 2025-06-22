@@ -29,7 +29,7 @@ To explore and identify key variables — such as financial health, age, sector,
 ##  Research Questions
 
 ### Main Question:
-> What factors from both charity operational data and local socioeconomic indicators influence the survivability of charitable organizations?
+What factors from both charity operational data and local socioeconomic indicators influence the survivability of charitable organizations?
 
 ###  Sub-Questions:
 1. **Financial Health**  

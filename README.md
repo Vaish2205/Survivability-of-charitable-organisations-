@@ -54,8 +54,9 @@ What factors from both charity operational data and local socioeconomic indicato
 - [x] Research questions defined  
 - [x] Datasets loaded and cleaned  
 - [x] Initial feature engineering completed  
-- [ ] Exploratory analysis in progress  
-- [ ] Modeling and evaluation (upcoming)
+- [x] Exploratory analysis in progress  
+- [x] Modeling and evaluation
+- [ ] More Enhancements (Current)
 
 
 

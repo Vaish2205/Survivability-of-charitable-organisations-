@@ -25,27 +25,22 @@ To explore and identify key variables — such as financial health, age, sector,
      - Area-level deprivation or housing data
    - Will be merged with charity data by postcode or region
 
+# Research Questions
 
-##  Research Questions
+## Main Research Question
+**Survivability of charitable organisations – What factors influence whether a charity survives?**
 
-### Main Question:
-What factors from both charity operational data and local socioeconomic indicators influence the survivability of charitable organizations?
+## Sub-Research Questions
 
-###  Sub-Questions:
-1. **Financial Health**  
-   How does a charity’s financial status (e.g., income, donations) impact its likelihood of survival?
+- **RQ1:** What organizational and temporal patterns distinguish surviving charities from those that cease operations?
 
-2. **Sector or Area of Focus**  
-   Are certain types of charities (e.g., education, health) more likely to survive?
+- **RQ2:** How do governance quality and operational factors quantitatively impact charity survival probability?
 
-3. **Age and Experience**  
-   Does the length of time a charity has operated affect its survival?
+- **RQ3:** How do financial characteristics and income patterns influence charity survival across different organizational segments?
 
-4. **Socioeconomic Context**  
-   How do local factors like average income or economic deprivation impact survival rates?
+- **RQ4:** How can advanced feature engineering and selection techniques improve model performance and reveal non-obvious survival predictors?
 
-5. **Cohort and Environment**  
-   Are charities founded more recently less likely to survive, especially in disadvantaged regions?
+- **RQ5:** How can survival prediction models be operationalized to support evidence-based charity sector decision-making?
 
 
 

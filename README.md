@@ -9,9 +9,7 @@ To explore and identify key variables — such as financial health, age, legal s
 
 ### 1. UK Charity Commission Dataset (Selected)
 - **Source**: Charity Commission for England and Wales full register download
-- **Scale**: 392,350 registered charities across 13 interconnected tables
 - **Coverage**: 1960s - 2024
-- **Total Records**: 8,033,850 across all tables
 - **Includes**:
   - Core organizational information (registration, legal structure, contact details)
   - Financial data (income, expenditure, reserves)
@@ -20,7 +18,6 @@ To explore and identify key variables — such as financial health, age, legal s
   - Regulatory history and compliance records
 
 ### 2. Companies House Dataset (Explored but not used)
-- **Scale**: 5.66 million UK companies
 - **Reason for exclusion**: Focus on charity-specific factors rather than general business patterns
 - **Decision rationale**: Charity Commission data provides sector-specific variables more relevant to charitable organization survival
 
@@ -56,4 +53,4 @@ To explore and identify key variables — such as financial health, age, legal s
 
 
 ## Note
-This README provides an overview of the project structure and methodology. The research contributes to understanding charity sector sustainability through comprehensive data science analysis of UK administrative data.
+This is an ongoing project and changes can be made as the research progresses. This README provides an overview of the project structure and methodology. The research contributes to understanding charity sector sustainability through comprehensive data science analysis of UK administrative data.

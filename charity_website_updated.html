@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharityScope - Survivability Analysis Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            margin: -30px auto 40px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .search-btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Results Section */
+        .results-section {
+            background: white;
+            margin: 20px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .charity-card {
+            border: 2px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .charity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .charity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .charity-name {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .charity-number {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .survival-score {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Risk Factors */
+        .risk-analysis {
+            margin-top: 30px;
+        }
+
+        .risk-factors {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .risk-category {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .risk-category h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .risk-high { border-left: 4px solid #e74c3c; }
+        .risk-medium { border-left: 4px solid #f39c12; }
+        .risk-low { border-left: 4px solid #27ae60; }
+
+        .factor-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .factor-item:last-child {
+            border-bottom: none;
+        }
+
+        .factor-impact {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .impact-high { background: #ffe6e6; color: #e74c3c; }
+        .impact-medium { background: #fff3e0; color: #f39c12; }
+        .impact-low { background: #e8f5e8; color: #27ae60; }
+
+        /* Progress Bars */
+        .progress-bar {
+            background: #e1e8ed;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 8px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: white;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .stat-description {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Project Attribution Section */
+        .project-section {
+            background: white;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-author {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            position: relative;
+        }
+
+        .project-author h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-author .author-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .supervisors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .supervisor-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .supervisor-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .supervisor-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .supervisor-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .supervisor-institution {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .methodology-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .methodology-link:hover {
+            transform: translateY(-2px);
+        }
+
+        /* About Section (Initially Hidden) */
+        .about-section {
+            background: white;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .research-question {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .research-question h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .research-question p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .research-question ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .research-question li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .research-question li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .risk-factors {
+                grid-template-columns: 1fr;
+            }
+
+            .charity-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .supervisors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e1e8ed;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tooltips */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Back button for methodology */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5a6fd8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">CS</div>
+                    <h1>CharityScope</h1>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#search">Search</a></li>
+                        <li><a href="#project">Project</a></li>
+                        <li><a href="#statistics">Statistics</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Charity Survivability Analysis</h2>
+            <p>Evidence-based insights into charity survival in UK (England and Wales)</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="search">
+        <div class="container">
+            <div class="search-section">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">Search Charity Analysis</h3>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Enter charity name or registration number..." id="charitySearch">
+                    <button class="search-btn" onclick="searchCharity()">🔍 Analyze</button>
+                </div>
+                <div style="text-align: center; color: #666; font-size: 0.9rem;">
+                    Examples: "British Red Cross", "Oxfam", "Cancer Research UK"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section>
+        <div class="container">
+            <div class="results-section" id="resultsSection">
+                <!-- Results will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section" id="statistics">
+        <div class="container">
+            <h3 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Research Insights</h3>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">Key findings from our survivability analysis</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">78.7%</div>
+                    <div class="stat-description">Overall Charity Survival Rate (Clean Dataset)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">81.9%</div>
+                    <div class="stat-description">Model Prediction Accuracy (AUC)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-description">Key Survival Features Identified</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Attribution Section -->
+    <section class="project-section" id="project">
+        <div class="container">
+            <div class="project-author">
+                <h3>Project Done By</h3>
+                <div class="author-name">Vaishnavi Patil</div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/vaishnavi-patil-964296212/" target="_blank" class="social-link">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/Vaish2205/Survivability-of-charitable-organisations-" target="_blank" class="social-link">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <h4 style="color: #2c3e50; margin-bottom: 20px; text-align: center;">Project Guided By</h4>
+            
+            <div class="supervisors-grid">
+                <div class="supervisor-card">
+                    <div class="supervisor-name">Luisa Cutillo</div>
+                    <div class="supervisor-title">Professor</div>
+                    <div class="supervisor-institution">University of Leeds</div>
+                </div>
+                
+                <div class="supervisor-card">
+                    <div class="supervisor-name">Alanna Keogh</div>
+                    <div class="supervisor-title">Senior Data Manager</div>
+                    <div class="supervisor-institution">Social Investment Business</div>
+                </div>
+                
+                <div class="supervisor-card">
+                    <div class="supervisor-name">Christopher Davy</div>
+                    <div class="supervisor-title">Research & Design Manager</div>
+                    <div class="supervisor-institution">Social Investment Business</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="methodology-link" onclick="showMethodology()">📋 View Detailed Methodology</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Initially Hidden) -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <a href="#" class="back-btn" onclick="hideMethodology()">← Back to Main Page</a>
+            
+            <h3 style="color: #2c3e50; margin-bottom: 20px;">About This Research</h3>
+            
+            <div class="research-question">
+                <h4>Main Research Question</h4>
+                <p><strong>"What factors determine charitable organisation survival in the UK, and how can predictive modeling support evidence-based decision-making in the charity sector?"</strong></p>
+                <p><strong>Answer:</strong> A logistic regression framework achieves 81.9% AUC and 81.6% accuracy, identifying governance quality as the dominant survival predictor. The model provides actionable insights for charity commissioners, funders, and organizational leaders while maintaining full statistical interpretability for policy applications.</p>
+            </div>
+
+            <h4 style="color: #2c3e50; margin: 30px 0 20px 0;">Sub Research Questions</h4>
+
+            <div class="research-question">
+                <h4>RQ1: What organizational demographics and structural characteristics differentiate surviving charities?</h4>
+                <ul>
+                    <li><strong>Age paradox discovery:</strong> Young charities (0-5 years) achieve 94.7% survival vs 30.6% for 50+ year organizations, contradicting conventional wisdom about organizational maturity</li>
+                    <li><strong>Legal structure advantage:</strong> Previously excepted charities (93.1%) and CIOs (91.4%) dramatically outperform traditional trusts (68.4%) and companies (70.4%)</li>
+                    <li><strong>Geographic scope impact:</strong> Single-area focused charities (76.3% of sector) show different survival patterns than broad-scope organizations</li>
+                    <li><strong>Registration era effects:</strong> Charities registered in different decades exhibit distinct survival trajectories, revealing sector evolution patterns</li>
+                </ul>
+            </div>
+
+            <div class="research-question">
+                <h4>RQ2: How do financial characteristics influence survival probability across income segments?</h4>
+                <ul>
+                    <li><strong>Critical income threshold identified:</strong> Clear survival improvement above £100k annual income - organizations with £500k+ achieve 84.3% survival vs 51.6% for under £10k (32.7% gap)</li>
+                    <li><strong>Sector financial stratification:</strong> 48% of charities operate below £10k income, representing highest-risk segment requiring targeted support</li>
+                    <li><strong>Resource dependency risk:</strong> Single-source funding reduces survival odds by 15.9%, while diversified funding strategies enhance organizational resilience</li>
+                    <li><strong>Scale economics evidence:</strong> Financial size effects demonstrate resource buffer importance for navigating operational challenges</li>
+                </ul>
+            </div>
+
+            <div class="research-question">
+                <h4>RQ3: Which governance and operational factors exhibit strongest association with survival outcomes?</h4>
+                <ul>
+                    <li><strong>Governance dominance confirmed:</strong> Adequate governance quality emerges as strongest survival predictor (154% permutation importance), with strong governance increasing survival odds by 375,617%</li>
+                    <li><strong>Operational activity correlation:</strong> Recent organizational activity increases survival probability by 75.8% (p<0.001), indicating active management importance</li>
+                    <li><strong>Transparency benefits:</strong> Clear mission statements and organizational descriptions correlate with improved survival outcomes through stakeholder confidence</li>
+                    <li><strong>Compliance indicator value:</strong> Regular filing patterns serve as governance quality proxies with significant predictive power</li>
+                </ul>
+            </div>
+
+            <div class="research-question">
+                <h4>RQ4: How can advanced feature engineering extract predictive signals from charity administrative data?</h4>
+                <ul>
+                    <li><strong>Governance feature synthesis:</strong> Engineered composite governance indicators from raw compliance data, transforming administrative records into powerful predictive features (strongest model predictors)</li>
+                    <li><strong>Temporal pattern extraction:</strong> Created time-based features capturing registration trends, compliance histories, and operational rhythms, revealing non-obvious survival patterns</li>
+                    <li><strong>Hidden predictor identification:</strong> Automated feature selection discovered previously excepted status as powerful but counterintuitive predictor (93.1% survival rate)</li>
+                    <li><strong>Feature validation rigor:</strong> Achieved 93.2% correlation between coefficient magnitude and permutation importance, demonstrating robust feature engineering methodology</li>
+                </ul>
+            </div>
+
+            <div class="research-question">
+                <h4>RQ5: What modeling approach optimizes both predictive performance and interpretability?</h4>
+                <ul>
+                    <li><strong>Logistic regression superiority:</strong> Outperformed complex alternatives while maintaining full interpretability - essential for policy applications requiring transparent decision rationale</li>
+                    <li><strong>Cross-validation excellence:</strong> 5-fold CV achieved exceptional stability (AUC: 0.820 ± 0.002) with minimal overfitting (train-val gap: 0.001), demonstrating robust generalization</li>
+                    <li><strong>Statistical rigor maintenance:</strong> Comprehensive assumption validation, calibration analysis (error: 0.0122), and significance testing across all predictors ensures academic standards</li>
+                    <li><strong>Production deployment readiness:</strong> Achieved "Excellent" deployment grade through threshold optimization (0.300), calibration validation, and comprehensive diagnostic testing suitable for automated risk assessment systems</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CharityScope - Evidence-Based Survivability Analysis Platform</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Based on UK charities (England and Wales) | Data extracted June 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // Updated charity database with accurate research-based examples
+        const charityDatabase = [
+            {
+                name: "British Red Cross",
+                registrationNumber: "220949",
+                survivalScore: 89,
+                age: 24,
+                ageCategory: "20-50 years",
+                type: "Charitable company",
+                income: 298500000,
+                incomeCategory: "£500k+",
+                governance: "Strong",
+                recentActivity: true,
+                diversification: "High",
+                compliance: "Excellent",
+                legalStructure: "Company",
+                geographic: "Country",
+                riskFactors: {
+                    high: ["Age category (20-50 years) - 65.4% survival rate", "Large organization complexity"],
+                    medium: ["Traditional legal structure", "High operational costs"],
+                    low: ["Strong governance structure", "Excellent compliance record", "High income diversification"]
+                }
+            },
+            {
+                name: "Cancer Research UK",
+                registrationNumber: "1089464",
+                survivalScore: 92,
+                age: 25,
+                ageCategory: "20-50 years",
+                type: "Charitable company",
+                income: 634000000,
+                incomeCategory: "£500k+",
+                governance: "Strong",
+                recentActivity: true,
+                diversification: "High",
+                compliance: "Excellent",
+                legalStructure: "Company",
+                geographic: "Country",
+                riskFactors: {
+                    high: ["High dependency on public donations"],
+                    medium: ["Competitive fundraising environment"],
+                    low: ["Strong governance", "High income threshold", "Recent activity", "Clear mission focus"]
+                }
+            },
+            {
+                name: "Local Village Hall Trust",
+                registrationNumber: "CIO123456",
+                survivalScore: 85,
+                age: 3,
+                ageCategory: "0-5 years",
+                type: "CIO",
+                income: 25000,
+                incomeCategory: "£10k-£100k",
+                governance: "Adequate",
+                recentActivity: true,
+                diversification: "Medium",
+                compliance: "Good",
+                legalStructure: "CIO",
+                geographic: "Local Authority",
+                riskFactors: {
+                    high: ["Low income category (below critical £100k threshold)"],
+                    medium: ["Limited diversification", "Local dependency"],
+                    low: ["Young charity (0-5 years) - 94.7% survival rate", "CIO structure (91.4% survival)", "Recent activity"]
+                }
+            },
+            {
+                name: "Heritage Preservation Society",
+                registrationNumber: "EX12345",
+                survivalScore: 94,
+                age: 8,
+                ageCategory: "5-20 years",
+                type: "Previously Excepted",
+                income: 15000,
+                incomeCategory: "£10k-£100k",
+                governance: "Adequate",
+                recentActivity: true,
+                diversification: "Low",
+                compliance: "Good",
+                legalStructure: "Previously Excepted",
+                geographic: "Regional",
+                riskFactors: {
+                    high: ["Low income", "Limited diversification"],
+                    medium: ["Narrow operational scope"],
+                    low: ["Previously excepted status (93.1% survival)", "Young organization", "Recent activity"]
+                }
+            }
+        ];
+
+        function searchCharity() {
+            const searchTerm = document.getElementById('charitySearch').value.toLowerCase().trim();
+            const resultsSection = document.getElementById('resultsSection');
+            
+            if (!searchTerm) {
+                alert('Please enter a charity name or registration number');
+                return;
+            }
+
+            // Show loading
+            resultsSection.style.display = 'block';
+            resultsSection.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const foundCharities = charityDatabase.filter(charity => 
+                    charity.name.toLowerCase().includes(searchTerm) || 
+                    charity.registrationNumber.toLowerCase().includes(searchTerm)
+                );
+
+                if (foundCharities.length === 0) {
+                    // Generate demo charity based on research findings
+                    const ageOptions = [
+                        {category: "0-5 years", survival: 94.7, age: Math.floor(Math.random() * 5) + 1},
+                        {category: "5-20 years", survival: 82.3, age: Math.floor(Math.random() * 15) + 5},
+                        {category: "20-50 years", survival: 65.4, age: Math.floor(Math.random() * 30) + 20},
+                        {category: "50+ years", survival: 30.6, age: Math.floor(Math.random() * 50) + 50}
+                    ];
+                    
+                    const structures = [
+                        {type: "CIO", survival: 91.4},
+                        {type: "Previously Excepted", survival: 93.1},
+                        {type: "Trust", survival: 68.4},
+                        {type: "Company", survival: 70.4}
+                    ];
+                    
+                    const incomeRanges = [
+                        {category: "Under £10k", survival: 51.6, income: Math.floor(Math.random() * 9000) + 1000},
+                        {category: "£10k-£100k", survival: 68.2, income: Math.floor(Math.random() * 90000) + 10000},
+                        {category: "£100k-£500k", survival: 79.5, income: Math.floor(Math.random() * 400000) + 100000},
+                        {category: "£500k+", survival: 84.3, income: Math.floor(Math.random() * 1000000) + 500000}
+                    ];
+
+                    const selectedAge = ageOptions[Math.floor(Math.random() * ageOptions.length)];
+                    const selectedStructure = structures[Math.floor(Math.random() * structures.length)];
+                    const selectedIncome = incomeRanges[Math.floor(Math.random() * incomeRanges.length)];
+                    
+                    // Calculate weighted survival score
+                    const baseScore = (selectedAge.survival + selectedStructure.survival + selectedIncome.survival) / 3;
+                    const governanceBonus = Math.random() > 0.7 ? 15 : Math.random() > 0.4 ? 8 : 0;
+                    const activityBonus = Math.random() > 0.3 ? 5 : -10;
+                    
+                    const finalScore = Math.min(Math.max(Math.round(baseScore + governanceBonus + activityBonus), 25), 98);
+
+                    const geographicScopes = [
+                        "Local Authority", // 55.9% 
+                        "Country", // 31.4%
+                        "Regional" // 12.7%
+                    ];
+                    
+                    const selectedGeographic = geographicScopes[Math.floor(Math.random() * geographicScopes.length)];
+
+                    const demoCharity = {
+                        name: searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1).replace(/[^a-zA-Z\s]/g, '') + " Charity",
+                        registrationNumber: "DEMO" + Math.floor(Math.random() * 999999),
+                        survivalScore: finalScore,
+                        age: selectedAge.age,
+                        ageCategory: selectedAge.category,
+                        type: selectedStructure.type,
+                        income: selectedIncome.income,
+                        incomeCategory: selectedIncome.category,
+                        governance: Math.random() > 0.6 ? "Strong" : Math.random() > 0.3 ? "Adequate" : "Basic",
+                        recentActivity: Math.random() > 0.3,
+                        diversification: Math.random() > 0.5 ? "High" : Math.random() > 0.3 ? "Medium" : "Low",
+                        compliance: Math.random() > 0.4 ? "Excellent" : Math.random() > 0.2 ? "Good" : "Poor",
+                        legalStructure: selectedStructure.type,
+                        geographic: selectedGeographic,
+                        riskFactors: generateRiskFactors(selectedAge, selectedStructure, selectedIncome, finalScore)
+                    };
+                    displayResults([demoCharity]);
+                } else {
+                    displayResults(foundCharities);
+                }
+            }, 1500);
+        }
+
+        function generateRiskFactors(ageData, structureData, incomeData, score) {
+            const factors = {high: [], medium: [], low: []};
+            
+            // Age-based factors
+            if (ageData.category === "50+ years") {
+                factors.high.push(`Age category (${ageData.category}) - ${ageData.survival}% survival rate`);
+            } else if (ageData.category === "0-5 years") {
+                factors.low.push(`Young charity (${ageData.category}) - ${ageData.survival}% survival rate`);
+            }
+            
+            // Structure-based factors
+            if (structureData.survival > 90) {
+                factors.low.push(`${structureData.type} structure (${structureData.survival}% survival rate)`);
+            } else if (structureData.survival < 70) {
+                factors.medium.push(`Traditional legal structure (${structureData.survival}% survival rate)`);
+            }
+            
+            // Income-based factors
+            if (incomeData.survival < 60) {
+                factors.high.push(`${incomeData.category} income - below critical threshold`);
+            } else if (incomeData.survival > 80) {
+                factors.low.push(`${incomeData.category} income - above critical threshold`);
+            }
+            
+            // Generic factors based on score
+            if (score < 60) {
+                factors.high.push("Multiple risk indicators", "Poor compliance patterns");
+                factors.medium.push("Limited operational scope");
+            } else if (score > 85) {
+                factors.low.push("Strong governance indicators", "Excellent compliance record", "Recent activity");
+            }
+            
+            return factors;
+        }
+
+        function displayResults(charities) {
+            const resultsSection = document.getElementById('resultsSection');
+            
+            let html = '<h3 style="color: #2c3e50; margin-bottom: 30px;">Survivability Analysis Results</h3>';
+            
+            charities.forEach(charity => {
+                const scoreColor = charity.survivalScore >= 80 ? '#27ae60' : 
+                                charity.survivalScore >= 60 ? '#f39c12' : '#e74c3c';
+                
+                html += `
+                    <div class="charity-card">
+                        <div class="charity-header">
+                            <div>
+                                <h3 class="charity-name">${charity.name}</h3>
+                                <p class="charity-number">Registration: ${charity.registrationNumber}</p>
+                            </div>
+                            <div class="survival-score" style="background: ${scoreColor}">
+                                ${charity.survivalScore}% Survival Score
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">${charity.age}</div>
+                                <div class="metric-label">Years Active</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">£${charity.income >= 1000000 ? (charity.income / 1000000).toFixed(1) + 'M' : (charity.income / 1000).toFixed(0) + 'K'}</div>
+                                <div class="metric-label">Annual Income</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${charity.type}</div>
+                                <div class="metric-label">Organization Type</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${charity.governance}</div>
+                                <div class="metric-label">Governance Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${charity.geographic || 'Local'}</div>
+                                <div class="metric-label">Geographic Scope</div>
+                            </div>
+                        </div>
+
+                        <div class="risk-analysis">
+                            <h4 style="color: #2c3e50; margin-bottom: 20px;">Research-Based Survival Factors</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Age Factor Impact</span>
+                                    <span>${charity.ageCategory === '0-5 years' ? '94.7%' : charity.ageCategory === '5-20 years' ? '82.3%' : charity.ageCategory === '20-50 years' ? '65.4%' : '30.6%'}</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${charity.ageCategory === '0-5 years' ? '95%' : charity.ageCategory === '5-20 years' ? '82%' : charity.ageCategory === '20-50 years' ? '65%' : '31%'}"></div>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Governance Structure (Primary Predictor)</span>
+                                    <span>${charity.governance === 'Strong' ? '95%' : charity.governance === 'Adequate' ? '78%' : '45%'}</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${charity.governance === 'Strong' ? '95%' : charity.governance === 'Adequate' ? '78%' : '45%'}"></div>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Income Threshold Effect</span>
+                                    <span>${charity.incomeCategory === '£500k+' ? '84.3%' : charity.incomeCategory === '£100k-£500k' ? '79.5%' : charity.incomeCategory === '£10k-£100k' ? '68.2%' : '51.6%'}</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${charity.incomeCategory === '£500k+' ? '84%' : charity.incomeCategory === '£100k-£500k' ? '80%' : charity.incomeCategory === '£10k-£100k' ? '68%' : '52%'}"></div>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Recent Activity (75.8% impact)</span>
+                                    <span>${charity.recentActivity ? '85%' : '35%'}</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${charity.recentActivity ? '85%' : '35%'}"></div>
+                                </div>
+                            </div>
+
+                            <div class="risk-factors">
+                                <div class="risk-category risk-high">
+                                    <h4>🔴 Risk Factors</h4>
+                                    ${charity.riskFactors.high.length > 0 ? charity.riskFactors.high.map(factor => `
+                                        <div class="factor-item">
+                                            <span>${factor}</span>
+                                            <span class="factor-impact impact-high">High Risk</span>
+                                        </div>
+                                    `).join('') : '<div class="factor-item"><span>No significant risk factors identified</span></div>'}
+                                </div>
+
+                                <div class="risk-category risk-low">
+                                    <h4>🟢 Protective Factors</h4>
+                                    ${charity.riskFactors.low.length > 0 ? charity.riskFactors.low.map(factor => `
+                                        <div class="factor-item">
+                                            <span>${factor}</span>
+                                            <span class="factor-impact impact-low">Protective</span>
+                                        </div>
+                                    `).join('') : '<div class="factor-item"><span>Limited protective factors identified</span></div>'}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #667eea;">
+                            <h4 style="color: #2c3e50; margin-bottom: 15px;">📊 Model-Based Insights</h4>
+                            <p style="color: #666; line-height: 1.6;">
+                                This organization shows 
+                                <strong style="color: ${scoreColor}">${charity.survivalScore >= 80 ? 'high' : charity.survivalScore >= 60 ? 'moderate' : 'elevated risk'} survivability profile</strong>.
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsSection.innerHTML = html;
+        }
+
+        // Show/Hide methodology functions
+        function showMethodology() {
+            document.getElementById('about').style.display = 'block';
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideMethodology() {
+            document.getElementById('about').style.display = 'none';
+            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Search on Enter key
+        document.getElementById('charitySearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchCharity();
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add sample searches for demonstration
+        function addSampleSearches() {
+            const searchSection = document.querySelector('.search-section');
+            const sampleSearches = document.createElement('div');
+            sampleSearches.style.marginTop = '20px';
+            sampleSearches.innerHTML = `
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <span style="color: #666; font-size: 0.9rem;">Try These Research Examples:</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="document.getElementById('charitySearch').value='British Red Cross'; searchCharity();" 
+                            style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 0.85rem;">
+                        British Red Cross
+                    </button>
+                    <button onclick="document.getElementById('charitySearch').value='Cancer Research'; searchCharity();" 
+                            style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 0.85rem;">
+                        Cancer Research UK
+                    </button>
+                    <button onclick="document.getElementById('charitySearch').value='Village Hall'; searchCharity();" 
+                            style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 0.85rem;">
+                        Village Hall Trust
+                    </button>
+                    <button onclick="document.getElementById('charitySearch').value='Heritage'; searchCharity();" 
+                            style="padding: 8px 15px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 0.85rem;">
+                        Heritage Society
+                    </button>
+                </div>
+            `;
+            searchSection.appendChild(sampleSearches);
+        }
+
+        // Add enhanced disclaimer section
+        function addDisclaimer() {
+            const footer = document.querySelector('footer .container');
+            const disclaimer = document.createElement('div');
+            disclaimer.style.marginTop = '30px';
+            disclaimer.style.padding = '20px';
+            disclaimer.style.background = 'rgba(255, 255, 255, 0.1)';
+            disclaimer.style.borderRadius = '10px';
+            disclaimer.style.fontSize = '0.85rem';
+            disclaimer.style.lineHeight = '1.6';
+            disclaimer.innerHTML = `
+                <h4 style="color: #2c3e50; margin-bottom: 15px; text-align: left;">📋 Disclaimer</h4>
+                <p style="text-align: left; color: #666;">
+                    This research analysis is based on historical charity data and statistical modeling. Results are for 
+                    informational purposes only and should not be the sole basis for decision-making. The findings reflect 
+                    patterns observed in the dataset and may not account for future changes in the charitable sector or 
+                    regulatory environment. For specific organizational decisions, please consult qualified charity management 
+                    professionals and advisors.
+                    <br><br>
+                    <strong>Note:</strong> This is a Masters dissertation project. The data analysis was conducted on actual and real datasets 
+                    from the UK Charity Commission, but for this website demonstration, sample data has been inserted to show 
+                    how a website can be created for future work and practical applications.
+                </p>
+            `;
+            footer.appendChild(disclaimer);
+        }
+
+        // Initialize all features when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            addSampleSearches();
+            addDisclaimer();
+        });
+    </script>
+</body>
+</html>

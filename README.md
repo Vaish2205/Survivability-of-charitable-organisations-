@@ -61,93 +61,101 @@ This is an ongoing project and changes can be made as the research progresses. T
 
 
 
+# Survivability of Charitable Organisations  
+**What factors influence whether a charity survives?**
 
-\documentclass[11pt,a4paper]{article}
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage{hyperref}
-\usepackage{enumitem}
+This repository contains the analysis, models, and report for a dissertation project conducted as part of the MSc Data Science and Analytics program at the University of Leeds, in collaboration with the Social Investment Business (SIB).
 
-\begin{document}
+---
 
-\title{Survivability of Charitable Organisations \\ \large What factors influence whether a charity survives?}
-\author{Vaishnavi Patil \\ MSc Data Science and Analytics, University of Leeds}
-\date{August 2025}
-\maketitle
+## 📌 Project Overview  
+This project investigates the determinants of survival among charitable organisations in the UK. Despite their social and economic significance, many charities face sustainability challenges. Using comprehensive administrative records from the **UK Charity Commission**, this study applies advanced data science techniques to explore which factors most strongly influence whether a charity continues operating or ceases operations.  
 
-\section*{Project Overview}
-This repository contains the analysis, models, and report for a dissertation project conducted as part of the MSc Data Science and Analytics programme at the University of Leeds, in collaboration with the Social Investment Business (SIB).
+The project contributes both **theoretical insights** into nonprofit organisational survival and **practical tools** to support evidence-based decision-making for charity leaders, funders, and policymakers.
 
-The project investigates the determinants of survival among charitable organisations in the UK. Using comprehensive administrative records from the UK Charity Commission, this study applies advanced data science techniques to explore which factors most strongly influence whether a charity continues operating or ceases operations.
+---
 
-\section*{Project Goal}
+## 🎯 Research Goal  
 To identify organisational, financial, governance, and operational factors that influence the survival of UK charities, and to build interpretable predictive models that support the sector’s sustainability.
 
-\section*{Datasets}
-\begin{enumerate}
-  \item \textbf{UK Charity Commission Dataset (Primary)}  
-  \begin{itemize}[leftmargin=2em]
-    \item Source: \href{https://register-of-charities.charitycommission.gov.uk/en/}{Charity Commission for England and Wales}
-    \item Coverage: 1960s--2024
-    \item Scale: 392,350 registered charities across 13 tables
-    \item Total Records: 8+ million
-    \item Includes: organisational info, financial data, governance, operations, compliance
-  \end{itemize}
-  \item \textbf{Companies House Dataset (Explored, not used)}  
-  \begin{itemize}[leftmargin=2em]
-    \item Scale: 5.66 million UK companies
-    \item Reason for exclusion: lacks charity-specific governance and compliance data
-  \end{itemize}
-\end{enumerate}
+---
 
-\section*{Research Questions}
-\textbf{Main Question:} What factors influence whether a charity survives?  
+## 📂 Datasets  
 
-\textbf{Sub-Questions:}
-\begin{enumerate}
-  \item What organisational demographics and structures differentiate surviving charities from those that cease operations?
-  \item How do financial characteristics and resource patterns influence survival probability across charity income segments?
-  \item Which governance and operational factors show the strongest association with survival outcomes?
-  \item How can feature engineering extract predictive signals from administrative data?
-  \item Which modelling approach best balances predictive performance and interpretability?
-\end{enumerate}
+### 1. UK Charity Commission Dataset (Primary)  
+- **Source:** [Charity Commission for England and Wales](https://register-of-charities.charitycommission.gov.uk/en/)  
+- **Coverage:** 1960s – 2024  
+- **Scale:** 392,350 registered charities across 13 interconnected tables  
+- **Total Records:** 8+ million  
+- **Includes:**  
+  - Organisational details (registration, legal structure, governing docs)  
+  - Financial data (income, expenditure, reserves)  
+  - Governance (trustees, policies)  
+  - Operations (activities, beneficiaries, geographic scope)  
+  - Compliance and regulatory history  
 
-\section*{Project Phases}
-\begin{enumerate}
-  \item Data acquisition \& cleaning
-  \item Exploratory Data Analysis (EDA)
-  \item Feature Engineering
-  \item Feature Selection
-  \item Modelling
-  \item Evaluation \& Validation
-  \item Reporting (dissertation and prototype dashboard)
-\end{enumerate}
+### 2. Companies House Dataset (Explored, Not Used)  
+- **Scale:** 5.66 million UK companies  
+- **Reason for Exclusion:** Lacks sector-specific governance and compliance data relevant to charities.  
 
-\section*{Key Findings}
-\begin{itemize}[leftmargin=2em]
-  \item \textbf{Top predictors of survival:} governance quality, younger organisational age, income above £10,000, recent operational activity, modern legal forms (CIOs).
-  \item \textbf{Model Performance (Logistic Regression):} Accuracy = 81.6\%, Recall = 99.0\%.
-  \item \textbf{Implications:} Younger charities can be more resilient; governance is the strongest determinant; prototype web tool supports risk assessment.
-\end{itemize}
+---
 
-\section*{Technical Details}
-\begin{itemize}[leftmargin=2em]
-  \item \textbf{Language:} Python
-  \item \textbf{Libraries:} pandas, numpy, scikit-learn, matplotlib, seaborn
-  \item \textbf{Files:} \texttt{Project Analysis.ipynb} (notebook), \texttt{Vaishnavi\_201896641.pdf} (full dissertation), \texttt{README.md}
-\end{itemize}
+## ❓ Research Questions  
 
-\section*{Status}
-\begin{itemize}[leftmargin=2em]
-  \item Research completed: data wrangling, analysis, modelling, validation
-  \item Dissertation written and submitted (August 2025)
-  \item Future work: dynamic survival analysis, causal inference
-\end{itemize}
+**Main Question:**  
+*What factors influence whether a charity survives?*
 
-\section*{Author}
-\textbf{Vaishnavi Patil} \\
-MSc Data Science and Analytics, University of Leeds \\
-Conducted under the CDRC Masters Dissertation Scheme \\
-Supervisors: Dr.\ Luissa Cutillo (University of Leeds), Christopher Davy and Alannah Keogh (Social Investment Business)
+**Sub-questions:**  
+1. What organisational demographics and structures differentiate surviving charities from those that cease operations?  
+2. How do financial characteristics and resource patterns influence survival probability across charity income segments?  
+3. Which governance and operational factors show the strongest association with survival outcomes?  
+4. How can feature engineering extract predictive signals from administrative data to improve accuracy?  
+5. Which modelling approach best balances predictive performance and interpretability for decision-making in the sector?  
 
-\end{document}
+---
+
+## 🔄 Project Phases  
+
+1. **Data Acquisition & Cleaning** – Merging 13 Charity Commission tables, handling missingness, ensuring temporal validity.  
+2. **Exploratory Data Analysis (EDA)** – Trends in registrations, closures, age, income, and governance.  
+3. **Feature Engineering** – Organisational demographics, financial thresholds, governance quality, temporal compliance, mission clarity.  
+4. **Feature Selection** – Consensus-based using correlation, mutual information, ANOVA, and Random Forest importance.  
+5. **Modelling** – Logistic regression as primary method, with robustness checks against alternative models.  
+6. **Evaluation & Validation** – 5-fold cross-validation, recall-focused optimisation, sensitivity analysis.  
+7. **Reporting** – Dissertation write-up, prototype dashboard for survival risk assessment.  
+
+---
+
+## 📊 Key Findings  
+
+- **Top predictors of survival:**  
+  - Governance quality (board size, oversight strength)  
+  - Younger organisational age (short-term resilience advantage)  
+  - Financial thresholds (income > £10,000)  
+  - Recency of operational activity and compliance  
+  - Modern legal structures (e.g., Charitable Incorporated Organisations)  
+
+- **Model Performance (Logistic Regression):**  
+  - Accuracy: **81.6%**  
+  - Recall (identifying at-risk charities): **99.0%**  
+
+- **Implications:**  
+  - Challenges some aspects of lifecycle theory (younger charities can be more resilient).  
+  - Governance emerges as the strongest determinant of survival.  
+  - Provides a prototype **web tool** for funders/regulators to assess risk in real time.  
+
+---
+
+## ⚙️ Technical Details  
+
+- **Language:** Python  
+- **Key Libraries:** pandas, numpy, scikit-learn, matplotlib, seaborn  
+- **Implementation:**  
+  - Multi-table integration and preprocessing in Jupyter Notebook  
+  - Logistic Regression with class weights for imbalance  
+  - Validation using cross-validation and ROC analysis  
+
+---
+
+## 📁 Repository Structure  
 

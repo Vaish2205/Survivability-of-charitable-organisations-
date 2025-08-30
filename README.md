@@ -79,6 +79,14 @@ To identify organisational, financial, governance, and operational factors that 
 - **Implications:**  
   - Challenges some aspects of lifecycle theory (younger charities can be more resilient).  
   - Governance emerges as the strongest determinant of survival.  
-  - Provides a prototype **web tool** for funders/regulators to assess risk in real time.  
+  - Provides a prototype **web tool** for funders/regulators to assess risk in real time.
+    
+----
+## 👩‍💻 Author  
 
+**Vaishnavi Patil**  
+MSc Data Science and Analytics, University of Leeds  
 
+Conducted under the **CDRC Masters Dissertation Scheme**, supervised by:  
+- Dr. Luissa Cutillo (University of Leeds)  
+- Christopher Davy & Alannah Keogh (Social Investment Business) 

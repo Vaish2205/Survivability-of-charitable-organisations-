@@ -84,10 +84,10 @@ To identify organisational, financial, governance, and operational factors that 
 ----
 ## 🌐 Prototype Website Screenshots  
 
-Below are sample screenshots of the prototype dashboard developed for this project:  
+Below are sample screenshots of the prototype website developed for this project:  
 
 ### Risk Assessment View  
-![Risk Dashboard](Images/9163B949-1448-4A32-AC86-52B633123C3A_1_105_c.jpeg)  
+![Interactive Charity Search](Images/9163B949-1448-4A32-AC86-52B633123C3A_1_105_c.jpeg)  
 
 ### Charity Profile View  
 ![Charity Profile](Images/EBC5061E-52AD-4840-903A-8A5BDCB4E2EE_1_105_c.jpeg)  

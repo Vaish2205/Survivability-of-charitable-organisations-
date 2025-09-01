@@ -86,7 +86,7 @@ To identify organisational, financial, governance, and operational factors that 
 
 Below are sample screenshots of the prototype website developed for this project:  
 
-### Risk Assessment View  
+### Interactive Charity Search  
 ![Interactive Charity Search](Images/9163B949-1448-4A32-AC86-52B633123C3A_1_105_c.jpeg)  
 
 ### Charity Profile View  

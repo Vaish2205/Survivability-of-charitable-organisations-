@@ -100,5 +100,5 @@ Below are sample screenshots of the prototype website developed for this project
 MSc Data Science and Analytics, University of Leeds  
 
 Conducted under the **CDRC Masters Dissertation Scheme**, supervised by:  
-- Dr. Luissa Cutillo (University of Leeds)  
-- Christopher Davy & Alannah Keogh (Social Investment Business) 
+- Dr. Luissa Cutillo (University of Leeds,UK)  
+- Christopher Davy & Alannah Keogh (Social Investment Business,UK) 
